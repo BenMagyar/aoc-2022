@@ -1,0 +1,25 @@
+#!/bin/bash
+touch "examples/$1.txt"
+pbpaste > "examples/$1.txt"
+cat > "src/d$1.py" <<EOF
+def prepare(input):
+    return input
+    
+def part_one(input):
+    
+def test(input):
+    input = prepare(input)
+    assert part_one(input) == ${2-0}
+
+def answer(input):
+    input = prepare(input)
+    print(part_one(input))
+EOF
+session=`cat .session`
+day=$(echo $1 | sed 's/^0*//')
+curl -s "https://adventofcode.com/2022/day/$day/input" \
+    -H "Cookie: session=$session" \
+    -o "inputs/$1.txt"
+fswatch -or "src/d$1.py" | xargs -n1 -I{} ./scripts/test $1
+echo "Answer:\r\n"
+./scripts/answer $1
