@@ -23,3 +23,6 @@ curl -s "https://adventofcode.com/2022/day/$day/input" \
 fswatch -or "src/d$1.py" | xargs -n1 -I{} ./scripts/test $1
 echo "Answer:\r\n"
 ./scripts/answer $1
+fswatch -or "src/d$1.py" | xargs -n1 -I{} ./scripts/test $1
+echo "Answer:\r\n"
+./scripts/answer $1
