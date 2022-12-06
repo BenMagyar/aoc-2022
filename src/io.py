@@ -1,7 +1,8 @@
 import os
 
 def clean(lines):
-    return [line.rstrip() for line in lines]
+    lines = [line.rstrip() for line in lines]
+    return lines[0] if len(lines) == 1 else lines
 
 def read_example(day):
     with open(os.path.join(os.getcwd(), "examples", day + ".txt")) as file:
